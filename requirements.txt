@@ -1,4 +1,5 @@
 ipykernel
+jupyter
 numpy
 gudhi
 matplotlib

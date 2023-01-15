@@ -1,0 +1,8 @@
+ipykernel
+numpy
+gudhi
+matplotlib
+pandas
+plotly
+nbformat
+scikit-learn

@@ -1,14 +1,27 @@
 import numpy as np
 
 class PointCloud():
-    def __init__(self, n_samples = 1000, n_points = 'random', manifolds=['sphere'],  noise = 0.05):
+    def __init__(self, n_samples=1000, n_points='random', noise=0.05):
+        '''
+        Generate point cloud data sampled from sphere, torus, Mobius strip and Klein bottle.
+            
+            Args :
+                n_samples (int) : The number of samples, i.e. the size of each dataset.
+                n_points (int or str) : The number of points in each point cloud. 
+                                        If n_points = 'random', assign n_points between 1000 and 2000 randomly.
+                noise (float) : The standard deviation of noise to include each point cloud.
+        '''
         self.n_samples = n_samples
         self.n_points = n_points
         self.noise = noise
 
-    def sphere(self):        
+    def sphere(self, r=1.0):        
         '''
-        Generate point cloud examples.
+        Generate point cloud examples from sphere.
+            Arg :
+                r (float) : the radius of sphere.
+            Return :
+                data (list) : The list containing the `n_samples` number of point clouds \nwhich consist of `n_points` points.
         '''
         data = []
 
@@ -23,18 +36,23 @@ class PointCloud():
             s = np.random.uniform(0, 2*np.pi, self.n_points)
         
             # parametric equation of sphere
-            sample[:, 0] = np.cos(s)*np.sin(t)   # x
-            sample[:, 1] = np.sin(s)*np.sin(t)   # y
-            sample[:, 2] = np.cos(t)             # z
+            sample[:, 0] = r*np.cos(s)*np.sin(t)   # x
+            sample[:, 1] = r*np.sin(s)*np.sin(t)   # y
+            sample[:, 2] = r*np.cos(t)             # z
 
             # random noise
             noise = np.random.normal(0, self.noise, size=sample.shape)
             data.append(sample + noise)
         return data
 
-    def torus(self):
+    def torus(self, R=2, r=1):
         '''
-        Generate point cloud examples.
+        Generate point cloud examples from torus.
+            Arg :
+                R (float) : the bigger radius of torus.
+                r (float) : the smaller radius of torus. (R>r)
+            Return :
+                data (list) : The list containing the `n_samples` number of point clouds \nwhich consist of `n_points` points.
         '''
         data = []
 
@@ -49,9 +67,9 @@ class PointCloud():
             s = np.random.uniform(0, 2*np.pi, self.n_points)
         
             # parametric equation of sphere
-            sample[:, 0] = (1*np.cos(s)+2)*np.cos(t)   # x
-            sample[:, 1] = (1*np.cos(s)+2)*np.sin(t)   # y
-            sample[:, 2] = 1*np.sin(s)             # z
+            sample[:, 0] = (r*np.cos(s)+R)*np.cos(t)   # x
+            sample[:, 1] = (r*np.cos(s)+R)*np.sin(t)   # y
+            sample[:, 2] = r*np.sin(s)             # z
 
             # random noise
             noise = np.random.normal(0, self.noise, size=sample.shape)
@@ -60,7 +78,11 @@ class PointCloud():
 
     def mobius(self):
         '''
-        Generate point cloud examples.
+        Generate point cloud examples from Mobius band.
+            Arg :
+                
+            Return :
+                data (list) : The list containing the `n_samples` number of point clouds \nwhich consist of `n_points` points.
         '''
         data = []
 
@@ -86,7 +108,11 @@ class PointCloud():
 
     def klein_bottle(self):
         '''
-        Generate point cloud examples.
+        Generate point cloud examples from Klein bottle.
+            Arg :
+                
+            Return :
+                data (list) : The list containing the `n_samples` number of point clouds \nwhich consist of `n_points` points.
         '''
         data = []
 

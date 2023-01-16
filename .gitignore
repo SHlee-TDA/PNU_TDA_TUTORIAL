@@ -1,2 +1,3 @@
+.gitignore
 .ipynb_checkpoints
 utils/__pycache__/*.pyc

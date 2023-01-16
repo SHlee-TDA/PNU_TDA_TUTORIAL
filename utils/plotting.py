@@ -7,13 +7,19 @@ import matplotlib.pyplot as plt
 pio.renderers.default = "notebook"
 
 def plot_point_cloud(point_cloud):
+    '''
+    Plot point cloud via `plotly` library.
+
+        Args :
+            point_cloud (numpy array) :  Point cloud sample with shape [n_points, x, y, z]
+    '''
     data = go.Scatter3d(
-    x=point_cloud[:,0],
-    y=point_cloud[:,1],
-    z=point_cloud[:,2],
-    text=['point #{}'.format(i) for i in range(len(point_cloud))],
-    mode='markers',
-    marker=dict(size=1)
+        x=point_cloud[:,0],
+        y=point_cloud[:,1],
+        z=point_cloud[:,2],
+        text=['point #{}'.format(i) for i in range(len(point_cloud))],
+        mode='markers',
+        marker=dict(size=1)
     )
 
     layout = go.Layout(
